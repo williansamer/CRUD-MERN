@@ -8,6 +8,7 @@
 
 input{
   padding: 5px;
+  margin-left: 5px;
   margin-bottom: 5px;
 }
 
@@ -19,4 +20,18 @@ button{
   border: none;
   border-radius: 5px;
   background-color: rgb(10, 169, 209)
+}
+
+.update{
+  font-size: 1em;
+  padding: 5px;
+  background-color: rgb(10, 169, 209);
+  margin: 0 5px 0 5px;
+}
+
+.delete{
+  font-size: 1em;
+  padding: 5px;
+  background-color: rgb(236, 67, 67);
+  margin: 0 5px 0 5px;
 }

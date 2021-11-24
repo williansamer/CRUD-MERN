@@ -6,12 +6,13 @@ function App() {
   const [nameFood, setNameFood] = useState("");
   const [cal, setCal] = useState(0);
   const [getFood, setGetFood] = useState([]);
+  const [updateNameFood, setUpdateNameFood] = useState("");
 
   useEffect(() => {
     Axios.get("http://localhost:3001/").then((res) => {
       setGetFood(res.data);
     });
-  }, []);
+  }, [getFood]);
 
   const handleClick = () => {
     Axios.post("http://localhost:3001/insert", {
@@ -21,6 +22,17 @@ function App() {
 
     setNameFood("");
     setCal(0);
+  };
+
+  const handleUpdate = (id) => {
+    Axios.put("http://localhost:3001/update", {
+      newName: updateNameFood,
+      id: id,
+    });
+  };
+
+  const handleDelete = (id) => {
+    Axios.delete(`http://localhost:3001/delete/${id}`);
   };
 
   return (
@@ -43,7 +55,20 @@ function App() {
       <ul>
         {getFood.map((food, key) => (
           <li key={key}>
-            <strong>Food: </strong>{food.name} - <strong>Calories: </strong>{food.calories}
+            <strong>Food: </strong>
+            {food.name} - <strong>Calories: </strong>
+            {food.calories}
+            <input
+              onChange={(event) => setUpdateNameFood(event.target.value)}
+              type="text"
+              placeholder="update food's name"
+            />
+            <button className="update" onClick={() => handleUpdate(food._id)}>
+              update
+            </button>
+            <button className="delete" onClick={() => handleDelete(food._id)}>
+              Delete
+            </button>
           </li>
         ))}
       </ul>
